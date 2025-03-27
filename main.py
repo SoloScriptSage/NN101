@@ -61,7 +61,7 @@ def f_forward(x, w1, w2):
    z2 = a1.dot(w2)
    a2 = sigmoid(z2)
 
-   return a2
+   return (a2)
 
 # Initializing the random weights
 def generate_weights(x, y):
@@ -76,7 +76,7 @@ def loss(out, Y):
    s = (np.square(out - Y))
    s = np.sum(s) / len(y)
 
-   return s
+   return (s)
 
 # Back propagation of error
 def backPropagation(x, y, w1, w2, alpha):
@@ -108,4 +108,47 @@ def backPropagation(x, y, w1, w2, alpha):
    return (w1, w2)
 
 
+def train(x, Y, w1, w2, alpha=0.01, epoch=10):
+   acc = []
+   losss = []
+   for j in range(epoch):
+      l=[]
+   for i in range(len(x)):
+      out = f_forward(x[i], w1, w2)
+      l.append(
+         (loss(out, Y[i]))
+      )
+
+      w1, w2 = backPropagation(x[i], y[i], w1, w2, alpha)
+
+   print("epochs:", j+1, "=== acc:",
+         (1-(sum(l)/len(x)))*100)
+   acc.append((1 - (sum(l) / len(x))) * 100)
+   losss.append(sum(l)/len(x))
+
+   return (acc, losss, w1, w2)
+
+def predict(x1, w1, w2):
+   Out = f_forward(x, w1, w2)
+   maxM = 0
+   k = 0
+   for i in range(len(Out[0])):
+      if(maxM < Out[0][i]):
+         maxM=Out[0][i]
+         k=i
+
+   if (k==0) :
+      print("image is of letter A.")
+   elif (k==1) :
+      print("img is of letter b.")
+   else:
+      print("image is of letter c.")
+
+   plt.imshow(x.reshape(5,6))
+   plt.show()
+
+w1 = generate_weights(30,5)
+w2 = generate_weights(5,3)
+
+print(w1, "\n\n", w2)
 
