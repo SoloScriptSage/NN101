@@ -152,3 +152,22 @@ w2 = generate_weights(5,3)
 
 print(w1, "\n\n", w2)
 
+acc, losss, w1, w2 = train(x, y, w1, w2, 0.1, 100)
+
+import matplotlib.pyplot as plt1
+
+# plotting accuracy
+plt1.plot(acc)
+plt1.ylabel('Accuracy')
+plt1.xlabel("Epochs:")
+plt1.show()
+
+# plotting Loss
+plt1.plot(losss)
+plt1.ylabel('Loss')
+plt1.xlabel("Epochs:")
+plt1.show()
+
+print(w1, "\n", w2)
+
+predict(x[1], w1, w2)
