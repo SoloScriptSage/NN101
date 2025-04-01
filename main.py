@@ -45,7 +45,16 @@ print(x, "\n\n", y)
 
 # Activation function
 def sigmoid(x):
-   return (1/(1 + np.exp(-x)))
+   return 1 / (1 + np.exp(-x))
+
+class Neuron:
+   def __init__(self, input_size):
+      self.weights = np.random.rand(input_size)
+      self.bias = np.random.rand()
+
+   def forward(self, inputs):
+      weighted_sum = np.dot(inputs, self.weights) + self.bias
+      return sigmoid(weighted_sum)
 
 # Creatnig the Feed forward neural network
 # 1 layes *INPUT (1,30)
@@ -171,3 +180,5 @@ plt1.show()
 print(w1, "\n", w2)
 
 predict(x[1], w1, w2)
+
+
